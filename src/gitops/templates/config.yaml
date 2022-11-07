@@ -1,29 +1,29 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "gitops.fullname" . }}
+  name: harness-gitops-config
   namespace: {{ .Release.Namespace }}
 data:
-  GITOPS_SERVICE_HTTP_BIND: {{.Values.GITOPS_SERVICE_HTTP_BIND | quote}}
-  GITOPS_SERVICE_HTTP_HOST: https://{{.Values.BASE}}.harness.io/{{.Values.CLUSTER}}/gitops
-  AGENT_GRPC_AUTHORITY: {{.Values.domainVersion}}{{.Values.domainPrefix}}gitops-grpc-{{.Values.BASE}}.harness.io
-  AGENT_GRPC_TARGET: {{.Values.BASE}}.harness.io:443
-  GITOPS_SERVICE_HTTP_ACME: {{.Values.GITOPS_SERVICE_HTTP_ACME | quote}}
-  GITOPS_SERVICE_MONGODB_DB_NAME: {{.Values.GITOPS_SERVICE_MONGODB_DB_NAME | quote}}
-  GITOPS_SERVICE_MONGODB_ENABLE_REFLECTION: {{.Values.GITOPS_SERVICE_MONGODB_ENABLE_REFLECTION | quote}}
-  GITOPS_SERVICE_TIMESCALE_DB_NAME: {{.Values.GITOPS_SERVICE_TIMESCALE_DB_NAME | quote}}
-  GITOPS_SERVICE_TIMESCALE_LOG_LEVEL: {{.Values.GITOPS_SERVICE_TIMESCALE_LOG_LEVEL | quote}}
-  REDIS_ENDPOINT: {{.Values.REDIS_ENDPOINT | quote}}
-  REDIS_PASSWORD: {{.Values.REDIS_PASSWORD | quote}}
-  REDIS_SSL_ENABLED: {{.Values.REDIS_SSL_ENABLED}}
-  REDIS_SSL_CA_CERT_PATH: {{.Values.REDIS_SSL_CA_CERT_PATH | quote }}
-  EVENTS_FRAMEWORK_ENV_NAMESPACE: {{.Values.EVENTS_FRAMEWORK_ENV_NAMESPACE | quote }}
-  ACCESS_CONTROL_SERVICE_BASEPATH: {{.Values.ACCESS_CONTROL_SERVICE_BASEPATH | quote }}
-  ACCESS_CONTROL_SERVICE_HOST: {{.Values.ACCESS_CONTROL_SERVICE_HOST | quote }}
-  PLATFORM_SERVICE_URL: {{.Values.PLATFORM_SERVICE_URL | quote }}
-  PLATFORM_SERVICE_SKIPSECUREVERIFY: {{.Values.PLATFORM_SERVICE_SKIPSECUREVERIFY | quote }}
-  DROP_ALL_INDEXES_ONCE: {{.Values.DROP_ALL_INDEXES_ONCE | quote}}
-  GITOPS_SERVICE_TIMESCALE_CERT_PATH: {{.Values.GITOPS_SERVICE_TIMESCALE_CERT_PATH | quote}}
-  GITOPS_SERVICE_TIMESCALE_USE_TLS: {{.Values.GITOPS_SERVICE_TIMESCALE_USE_TLS}}
-  GITOPS_SERVICE_TASK_LONG_POLLING: {{.Values.GITOPS_SERVICE_TASK_LONG_POLLING}}
-  ENABLE_CDN: {{.Values.ENABLE_CDN}}
+  GITOPS_SERVICE_HTTP_BIND: {{.Values.global.httpBind | quote}}
+  GITOPS_SERVICE_HTTP_HOST: https://{{.Values.global.httpHostBase}}.harness.io/{{.Values.global.cluster}}/gitops
+  AGENT_GRPC_AUTHORITY: {{.Values.global.domainVersion}}{{.Values.global.domainPrefix}}gitops-grpc-{{.Values.global.httpHostBase}}.harness.io
+  AGENT_GRPC_TARGET: {{.Values.global.httpHostBase}}.harness.io:443
+  GITOPS_SERVICE_HTTP_ACME: {{.Values.global.gitopsHttpAcme | quote}}
+  GITOPS_SERVICE_MONGODB_DB_NAME: {{.Values.global.mongo.dbName | quote}}
+  GITOPS_SERVICE_MONGODB_ENABLE_REFLECTION: {{.Values.global.mongo.enableReflection | quote}}
+  GITOPS_SERVICE_TIMESCALE_DB_NAME: {{.Values.global.timescale.dbName | quote}}
+  GITOPS_SERVICE_TIMESCALE_LOG_LEVEL: {{.Values.global.timescale.logLevel | quote}}
+  REDIS_ENDPOINT: {{.Values.global.redis.endpoint | quote}}
+  REDIS_PASSWORD: {{.Values.global.redis.password | quote}}
+  REDIS_SSL_ENABLED: {{.Values.global.redis.sslEnabled | quote}}
+  REDIS_SSL_CA_CERT_PATH: {{.Values.global.redis.sslCAPath | quote}}
+  EVENTS_FRAMEWORK_ENV_NAMESPACE: {{.Values.global.eventsFrameworkEnvNamespace | quote}}
+  ACCESS_CONTROL_SERVICE_BASEPATH: {{.Values.global.accessControlService.basePath | quote}}
+  ACCESS_CONTROL_SERVICE_HOST: {{.Values.global.accessControlService.host | quote}}
+  PLATFORM_SERVICE_URL: {{.Values.global.platformService.url | quote}}
+  PLATFORM_SERVICE_SKIPSECUREVERIFY: {{.Values.global.platformService.skipSecureVerify | quote}}
+  DROP_ALL_INDEXES_ONCE: {{.Values.global.mongo.dropAllIndexesOnce | quote}}
+  GITOPS_SERVICE_TIMESCALE_CERT_PATH: {{.Values.global.timescale.certPath | quote}}
+  GITOPS_SERVICE_TIMESCALE_USE_TLS: {{.Values.global.timescale.useTls | quote}}
+  GITOPS_SERVICE_TASK_LONG_POLLING: {{.Values.global.gitopsTaskLongPolling | quote}}
+  ENABLE_CDN: {{.Values.global.enableCDN | quote}}

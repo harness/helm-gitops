@@ -35,14 +35,14 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: gitops-http
-              containerPort: {{.Values.httpServerPort}}
+              containerPort: {{.Values.service.httpServerPort}}
               protocol: TCP
             - name: gitops-grpc
-              containerPort: {{.Values.grpcServerPort}}
+              containerPort: {{.Values.service.grpcServerPort}}
               protocol: TCP
           envFrom:
           - configMapRef:
-              name: {{.Values.name}}
+              name: harness-gitops-config
           livenessProbe:
             httpGet:
               path: /healthz

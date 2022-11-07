@@ -5,11 +5,11 @@
 replicaCount: 1
 
 image:
-  registry: docker.io
-  repository: nginx
-  pullPolicy: IfNotPresent
+#  registry: docker.io
+  repository: harness/gitops-service
+  pullPolicy: Never
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "v0.0.1"
   digest: ""
 
 imagePullSecrets: []
@@ -40,8 +40,8 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  httpServerPort: 80
-  grpcServerPort: 80
+  httpServerPort: 7908
+  grpcServerPort: 7909
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -67,3 +67,38 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+ingress:
+  enabled: true
+
+global:
+  httpBind: "gops"
+  httpHostBase: "base123"
+  cluster: "cluster1"
+  domainVersion: "dV123"
+  domainPrefix: "dPre"
+  enableCDN: "false"
+  eventsFrameworkEnvNamespace: ""
+  gitopsHttpAcme: "ACME"
+  mongo:
+    enableReflection: "false"
+    dbName: "harness-gitops"
+    dropAllIndexesOnce: "false"
+  timescale:
+    certPath : ""
+    dbName: "harness-gitops"
+    logLevel : 2
+    useTls: "false"
+  redis:
+    endpoint: "localhost:6379"
+    password : ""
+    sslCAPath: ""
+    sslEnabled: "false"
+  accessControlService:
+    basePath: ""
+    host: ""
+  platformService:
+    url: ""
+    skipSecureVerify: "true"
+  gitopsTaskLongPolling: "true"
+
