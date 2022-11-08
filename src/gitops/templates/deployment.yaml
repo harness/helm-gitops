@@ -1,0 +1,122 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "gitops.fullname" . }}
+  labels:
+    {{- include "gitops.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "gitops.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "gitops.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "gitops.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: wait-for-mongo
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
+          imagePullPolicy: IfNotPresent
+          args:
+            - "pod"
+            - "-lapp=mongodb-replicaset"
+        - name: wait-for-timescale
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
+          imagePullPolicy: IfNotPresent
+          args:
+            - "pod"
+            - "-lapp=timescaledb-single-chart"
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: gitops-http
+              containerPort: {{.Values.service.httpServerPort}}
+              protocol: TCP
+            - name: gitops-grpc
+              containerPort: {{.Values.service.grpcServerPort}}
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: harness-gitops-config
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.global.redis.password.name }}
+                  key: {{ .Values.global.redis.password.key }}
+            - name: MONGODB_USERNAME
+              valueFrom:
+                  secretKeyRef:
+                    name: {{ .Values.global.mongo.username.name }}
+                    key: {{ .Values.global.mongo.username.key }}
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.global.mongo.password.name }}
+                  key: {{ .Values.global.mongo.password.key }}
+            - name: TIMESCALE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.global.timescale.password.name }}
+                  key: {{ .Values.global.timescale.password.key }}
+            - name: GITOPS_SERVICE_TIMESCALE_URL
+              value:  postgres://postgres:$(TIMESCALE_PASSWORD)@timescaledb-single-chart.{{ .Release.Namespace }}:5432/harness_gitops
+            - name: GITOPS_SERVICE_MONGODB_URL
+              value: {{ include "harnesscommon.database.mongo" (dict "database" "harness-gitops" "context" $) }}
+            - name: ACL_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.global.accessControlService.secret.name }}
+                  key: {{ .Values.global.accessControlService.secret.key }}
+            - name : LOGGING_SVC_ACC_JSON_KEY
+              value: ""
+            - name: IDENTITY_SERVICE_SECRET
+              value: ""
+            - name: JWT_SECRET
+              value: ""
+
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: {{.Values.service.httpServerPort}}
+            initialDelaySeconds: 3
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{.Values.service.httpServerPort}}
+            initialDelaySeconds: 3
+            periodSeconds: 30
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
