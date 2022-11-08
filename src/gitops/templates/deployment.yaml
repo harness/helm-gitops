@@ -57,11 +57,6 @@ spec:
             - configMapRef:
                 name: harness-gitops-config
           env:
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.global.redis.password.name }}
-                  key: {{ .Values.global.redis.password.key }}
             - name: MONGODB_USERNAME
               valueFrom:
                   secretKeyRef:
@@ -92,7 +87,6 @@ spec:
               value: ""
             - name: JWT_SECRET
               value: ""
-
 
           livenessProbe:
             httpGet:

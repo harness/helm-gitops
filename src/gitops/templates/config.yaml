@@ -12,10 +12,10 @@ data:
   AGENT_HTTP_TARGET: {{.Values.global.agent.httpTarget | quote}}
   AGENT_PROTOCOL: {{.Values.global.agent.protocol | quote}}
   EVENTS_FRAMEWORK_ENV_NAMESPACE: {{.Values.global.eventsFrameworkEnvNamespace | quote}}
-  GITOPS_SERVICE_HTTP_BIND: {{.Values.global.httpBind | quote}}
-  GITOPS_SERVICE_HTTP_HOST: https://{{.Values.global.httpHostBase}}.harness.io/{{.Values.global.cluster}}/gitops
-  AGENT_GRPC_AUTHORITY: {{.Values.global.domainVersion}}{{.Values.global.domainPrefix}}gitops-grpc-{{.Values.global.httpHostBase}}.harness.io
-  AGENT_GRPC_TARGET: {{.Values.global.httpHostBase}}.harness.io:443
+  GITOPS_SERVICE_HTTP_BIND: {{ .Values.global.loadbalancerURL | quote}}
+  GITOPS_SERVICE_HTTP_HOST: https://{{ .Values.global.loadbalancerURL }}/gitops
+  AGENT_GRPC_AUTHORITY: {{ .Values.global.loadbalancerURL }}
+  AGENT_GRPC_TARGET: {{ .Values.global.loadbalancerURL }}{{ .Values.global.loadbalancerURL }}:443
   DROP_ALL_INDEXES_ONCE: {{.Values.global.mongo.dropAllIndexesOnce | quote}}
   ENABLE_CDN: {{.Values.global.enableCDN | quote}}
   GITOPS_AGENT_VERSION_FILE_LOCATION: {{.Values.global.agent.versionFileLocation | quote}}
@@ -37,7 +37,7 @@ data:
   GITOPS_SERVICE_VERSION_FILE_LOCATION: {{.Values.global.versionFileLocation | quote}}
   PLATFORM_SERVICE_URL: {{.Values.global.platformService.url | quote}}
   PLATFORM_SERVICE_SKIPSECUREVERIFY: {{.Values.global.platformService.skipSecureVerify | quote}}
-  REDIS_ENDPOINT: {{.Values.global.redis.endpoint | quote}}
+  REDIS_ENDPOINT: 'redis://redis-sentinel-harness-announce-0.{{ .Release.Namespace }}:26379,redis://redis-sentinel-harness-announce-1.{{ .Release.Namespace }}:26379,redis://redis-sentinel-harness-announce-2.{{ .Release.Namespace }}:26379'
   REDIS_MASTER_NAME: {{.Values.global.redis.masterName | quote}}
   REDIS_SSL_ENABLED: {{.Values.global.redis.sslEnabled | quote}}
   REDIS_SSL_CA_CERT_PATH: {{.Values.global.redis.sslCAPath | quote}}

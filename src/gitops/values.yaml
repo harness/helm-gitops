@@ -87,6 +87,7 @@ waitForInitContainer:
     digest: ""
 
 global:
+  loadbalancerURL: "https://test"
   accessControlService:
     basePath: ""
     host: ""
@@ -95,8 +96,8 @@ global:
       name: harness-secrets
       key: aclSecret
   agent:
-    httpTarget: localhost:7908
-    grpcTarget: localhost:7909
+    httpTarget: gitops-service:7908
+    grpcTarget: gitops-service:7909
     protocol: "GRPC"
     versionFileLocation: "/app/VERSIONS/AGENT"
     upgraderImage: "harness/upgrader:latest"
@@ -104,16 +105,11 @@ global:
     minimumV2Version: "0.33.0"
     enableAuth: "false"
   certPath: ""
-  cluster: "cluster1"
-  domainVersion: "dV123"
-  domainPrefix: "dPre"
   enableCDN: "false"
   eventsFrameworkEnvNamespace: ""
   gitopsHttpAcme: "false"
   gitopsTaskLongPolling: "true"
   grpcPort: 7909
-  httpBind: "gops"
-  httpHostBase: "base-gitops"
   keyPath: ""
   logFormat: ""
   metricsPort: 6565
@@ -139,8 +135,7 @@ global:
     url: ""
     skipSecureVerify: "true"
   redis:
-    endpoint: "localhost:6379"
-    masterName: "mymaster"
+    masterName: "harness-redis"
     password:
       name: harness-secrets
       key: redisPassword
