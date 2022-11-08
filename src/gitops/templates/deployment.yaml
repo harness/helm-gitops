@@ -77,11 +77,8 @@ spec:
             - name: GITOPS_SERVICE_MONGODB_URL
               value: {{ include "harnesscommon.database.mongo" (dict "database" "harness-gitops" "context" $) }}
             - name: ACL_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.global.accessControlService.secret.name }}
-                  key: {{ .Values.global.accessControlService.secret.key }}
-            - name : LOGGING_SVC_ACC_JSON_KEY
+              value: ""
+            - name: LOGGING_SVC_ACC_JSON_KEY
               value: ""
             - name: IDENTITY_SERVICE_SECRET
               value: ""

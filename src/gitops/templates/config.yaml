@@ -12,10 +12,10 @@ data:
   AGENT_HTTP_TARGET: {{.Values.global.agent.httpTarget | quote}}
   AGENT_PROTOCOL: {{.Values.global.agent.protocol | quote}}
   EVENTS_FRAMEWORK_ENV_NAMESPACE: {{.Values.global.eventsFrameworkEnvNamespace | quote}}
-  GITOPS_SERVICE_HTTP_BIND: {{ .Values.global.loadbalancerURL | quote}}
-  GITOPS_SERVICE_HTTP_HOST: https://{{ .Values.global.loadbalancerURL }}/gitops
+  GITOPS_SERVICE_HTTP_BIND: {{ .Values.service.httpBind | quote}}
+  GITOPS_SERVICE_HTTP_HOST: {{ .Values.global.loadbalancerURL }}/gitops
   AGENT_GRPC_AUTHORITY: {{ .Values.global.loadbalancerURL }}
-  AGENT_GRPC_TARGET: {{ .Values.global.loadbalancerURL }}{{ .Values.global.loadbalancerURL }}:443
+  AGENT_GRPC_TARGET: {{ .Values.global.loadbalancerURL }}:443
   DROP_ALL_INDEXES_ONCE: {{.Values.global.mongo.dropAllIndexesOnce | quote}}
   ENABLE_CDN: {{.Values.global.enableCDN | quote}}
   GITOPS_AGENT_VERSION_FILE_LOCATION: {{.Values.global.agent.versionFileLocation | quote}}

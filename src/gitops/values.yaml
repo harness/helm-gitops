@@ -23,7 +23,7 @@ serviceAccount:
   annotations: { }
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  name: "harness-default"
 
 podAnnotations: { }
 
@@ -43,6 +43,7 @@ service:
   httpServerPort: 7908
   grpcServerPort: 7909
   port: 80
+  httpBind: ":7908"
 
 resources: { }
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -92,9 +93,9 @@ global:
     basePath: ""
     host: ""
     skipSecureVerify: "true"
-    secret:
-      name: harness-secrets
-      key: aclSecret
+#    secret:
+#      name: harness-secrets
+#      key: aclSecret
   agent:
     httpTarget: gitops-service:7908
     grpcTarget: gitops-service:7909
