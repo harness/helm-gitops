@@ -4,26 +4,41 @@ metadata:
   name: harness-gitops-config
   namespace: {{ .Release.Namespace }}
 data:
+  ACCESS_CONTROL_SERVICE_BASEPATH: {{.Values.global.accessControlService.basePath | quote}}
+  ACCESS_CONTROL_SERVICE_HOST: {{.Values.global.accessControlService.host | quote}}
+  ACCESS_CONTROL_SERVICE_SKIPSECUREVERIFY: {{.Values.global.accessControlService.skipSecureVerify | quote}}
+  AGENT_DOCKER_IMAGE_REPO: {{.Values.global.agent.dockerImageRepo | quote}}
+  AGENT_ENABLE_AUTH: {{.Values.global.agent.enableAuth | quote}}
+  AGENT_HTTP_TARGET: {{.Values.global.agent.httpTarget | quote}}
+  AGENT_PROTOCOL: {{.Values.global.agent.protocol | quote}}
+  EVENTS_FRAMEWORK_ENV_NAMESPACE: {{.Values.global.eventsFrameworkEnvNamespace | quote}}
   GITOPS_SERVICE_HTTP_BIND: {{.Values.global.httpBind | quote}}
   GITOPS_SERVICE_HTTP_HOST: https://{{.Values.global.httpHostBase}}.harness.io/{{.Values.global.cluster}}/gitops
   AGENT_GRPC_AUTHORITY: {{.Values.global.domainVersion}}{{.Values.global.domainPrefix}}gitops-grpc-{{.Values.global.httpHostBase}}.harness.io
   AGENT_GRPC_TARGET: {{.Values.global.httpHostBase}}.harness.io:443
+  DROP_ALL_INDEXES_ONCE: {{.Values.global.mongo.dropAllIndexesOnce | quote}}
+  ENABLE_CDN: {{.Values.global.enableCDN | quote}}
+  GITOPS_AGENT_VERSION_FILE_LOCATION: {{.Values.global.agent.versionFileLocation | quote}}
+  GITOPS_AGENT_UPGRADER_IMAGE: {{.Values.global.agent.upgraderImage | quote}}
+  GITOPS_LOG_FORMAT: {{.Values.global.logFormat | quote}}
+  GITOPS_MINIMUM_AGENT_VERSION_V2: {{.Values.global.agent.minimumV2Version | quote}}
+  GITOPS_SERVICE_CERT_PATH: {{.Values.global.certPath | quote}}
+  GITOPS_SERVICE_GRPC_PORT: {{.Values.global.grpcPort | quote}}
   GITOPS_SERVICE_HTTP_ACME: {{.Values.global.gitopsHttpAcme | quote}}
+  GITOPS_SERVICE_KEY_PATH: {{.Values.global.keyPath | quote}}
+  GITOPS_SERVICE_METRICS_PORT: {{.Values.global.metricsPort | quote}}
   GITOPS_SERVICE_MONGODB_DB_NAME: {{.Values.global.mongo.dbName | quote}}
   GITOPS_SERVICE_MONGODB_ENABLE_REFLECTION: {{.Values.global.mongo.enableReflection | quote}}
+  GITOPS_SERVICE_TASK_LONG_POLLING: {{.Values.global.gitopsTaskLongPolling | quote}}
+  GITOPS_SERVICE_TIMESCALE_CERT_PATH: {{.Values.global.timescale.certPath | quote}}
   GITOPS_SERVICE_TIMESCALE_DB_NAME: {{.Values.global.timescale.dbName | quote}}
   GITOPS_SERVICE_TIMESCALE_LOG_LEVEL: {{.Values.global.timescale.logLevel | quote}}
-  REDIS_ENDPOINT: {{.Values.global.redis.endpoint | quote}}
-  REDIS_PASSWORD: {{.Values.global.redis.password | quote}}
-  REDIS_SSL_ENABLED: {{.Values.global.redis.sslEnabled | quote}}
-  REDIS_SSL_CA_CERT_PATH: {{.Values.global.redis.sslCAPath | quote}}
-  EVENTS_FRAMEWORK_ENV_NAMESPACE: {{.Values.global.eventsFrameworkEnvNamespace | quote}}
-  ACCESS_CONTROL_SERVICE_BASEPATH: {{.Values.global.accessControlService.basePath | quote}}
-  ACCESS_CONTROL_SERVICE_HOST: {{.Values.global.accessControlService.host | quote}}
+  GITOPS_SERVICE_TIMESCALE_USE_TLS: {{.Values.global.timescale.useTls | quote}}
+  GITOPS_SERVICE_VERSION_FILE_LOCATION: {{.Values.global.versionFileLocation | quote}}
   PLATFORM_SERVICE_URL: {{.Values.global.platformService.url | quote}}
   PLATFORM_SERVICE_SKIPSECUREVERIFY: {{.Values.global.platformService.skipSecureVerify | quote}}
-  DROP_ALL_INDEXES_ONCE: {{.Values.global.mongo.dropAllIndexesOnce | quote}}
-  GITOPS_SERVICE_TIMESCALE_CERT_PATH: {{.Values.global.timescale.certPath | quote}}
-  GITOPS_SERVICE_TIMESCALE_USE_TLS: {{.Values.global.timescale.useTls | quote}}
-  GITOPS_SERVICE_TASK_LONG_POLLING: {{.Values.global.gitopsTaskLongPolling | quote}}
-  ENABLE_CDN: {{.Values.global.enableCDN | quote}}
+  REDIS_ENDPOINT: {{.Values.global.redis.endpoint | quote}}
+  REDIS_MASTER_NAME: {{.Values.global.redis.masterName | quote}}
+  REDIS_SSL_ENABLED: {{.Values.global.redis.sslEnabled | quote}}
+  REDIS_SSL_CA_CERT_PATH: {{.Values.global.redis.sslCAPath | quote}}
+

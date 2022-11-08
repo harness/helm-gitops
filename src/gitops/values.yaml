@@ -5,14 +5,14 @@
 replicaCount: 1
 
 image:
-#  registry: docker.io
-  repository: harness/gitops-service
-  pullPolicy: Never
+  registry: docker.io
+  repository: harness/gitops-service-signed
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.0.1"
+  tag: "v0.49.5"
   digest: ""
 
-imagePullSecrets: []
+imagePullSecrets: [ ]
 nameOverride: ""
 fullnameOverride: ""
 
@@ -20,30 +20,31 @@ serviceAccount:
   # Specifies whether a service account should be created
   create: true
   # Annotations to add to the service account
-  annotations: {}
+  annotations: { }
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations: {}
+podAnnotations: { }
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext: { }
+# fsGroup: 2000
 
-securityContext: {}
+securityContext: { }
   # capabilities:
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# runAsNonRoot: true
+# runAsUser: 1000
 
 service:
   type: ClusterIP
   httpServerPort: 7908
   grpcServerPort: 7909
+  port: 80
 
-resources: {}
+resources: { }
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -52,8 +53,8 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
   # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+#   cpu: 100m
+#   memory: 128Mi
 
 autoscaling:
   enabled: false
@@ -62,43 +63,90 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-nodeSelector: {}
+nodeSelector: { }
 
-tolerations: []
+tolerations: [ ]
 
-affinity: {}
+affinity: { }
 
 ingress:
   enabled: true
+  className: "gitops-http-ingress"
+  hosts:
+    - host: ""
+      paths:
+        - path: /gitops
+          pathType: Prefix
+
+waitForInitContainer:
+  image:
+    registry: docker.io
+    repository: harness/helm-init-container
+    pullPolicy: IfNotPresent
+    tag: "latest"
+    digest: ""
 
 global:
-  httpBind: "gops"
-  httpHostBase: "base123"
+  accessControlService:
+    basePath: ""
+    host: ""
+    skipSecureVerify: "true"
+    secret:
+      name: harness-secrets
+      key: aclSecret
+  agent:
+    httpTarget: localhost:7908
+    grpcTarget: localhost:7909
+    protocol: "GRPC"
+    versionFileLocation: "/app/VERSIONS/AGENT"
+    upgraderImage: "harness/upgrader:latest"
+    dockerImageRepo: "harness/gitops-agent"
+    minimumV2Version: "0.33.0"
+    enableAuth: "false"
+  certPath: ""
   cluster: "cluster1"
   domainVersion: "dV123"
   domainPrefix: "dPre"
   enableCDN: "false"
   eventsFrameworkEnvNamespace: ""
-  gitopsHttpAcme: "ACME"
+  gitopsHttpAcme: "false"
+  gitopsTaskLongPolling: "true"
+  grpcPort: 7909
+  httpBind: "gops"
+  httpHostBase: "base-gitops"
+  keyPath: ""
+  logFormat: ""
+  metricsPort: 6565
   mongo:
     enableReflection: "false"
     dbName: "harness-gitops"
     dropAllIndexesOnce: "false"
+    username:
+      name: harness-secrets
+      key: mongodbUsername
+    password:
+      name: mongodb-replicaset-chart
+      key: mongodb-root-password
   timescale:
-    certPath : ""
+    certPath: ""
     dbName: "harness-gitops"
-    logLevel : 2
+    logLevel: 2
     useTls: "false"
-  redis:
-    endpoint: "localhost:6379"
-    password : ""
-    sslCAPath: ""
-    sslEnabled: "false"
-  accessControlService:
-    basePath: ""
-    host: ""
+    password:
+      name: harness-secrets
+      key: timescaledbPostgresPassword
   platformService:
     url: ""
     skipSecureVerify: "true"
-  gitopsTaskLongPolling: "true"
+  redis:
+    endpoint: "localhost:6379"
+    masterName: "mymaster"
+    password:
+      name: harness-secrets
+      key: redisPassword
+    sslCAPath: ""
+    sslEnabled: "false"
+  versionFileLocation: "/app/VERSIONS/SERVER"
+
+
 
