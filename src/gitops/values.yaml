@@ -89,7 +89,14 @@ waitForInitContainer:
 global:
   ingress:
     enabled: false
-
+  istio:
+    enabled: true
+    gateway:
+      create: true
+    virtualService:
+      gateways:
+      hosts:
+  host: "test"
   loadbalancerURL: "https://test"
   accessControlService:
     basePath: ""
