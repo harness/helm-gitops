@@ -1,4 +1,19 @@
 {{/*
+Return the proper image name
+{{ include "gitops.images.image" ( dict "imageRoot" .Values.path.to.the.image "global" $) }}
+*/}}
+{{- define "gitops.images.image" -}}
+{{- $registryName := .imageRoot.registry -}}
+{{- $repositoryName := .imageRoot.repository -}}
+{{- if .global }}
+  {{- if .global.imageRegistry }}
+    {{- $registryName = .global.imageRegistry -}}
+  {{- end -}}
+{{- end -}}
+{{- printf "%s/%s" $registryName $repositoryName -}}
+{{- end -}}
+
+{{/*
 Expand the name of the chart.
 */}}
 {{- define "gitops.name" -}}
