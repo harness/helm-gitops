@@ -129,7 +129,7 @@ accessControlService:
 agent:
   httpTarget: gitops-service:7908
   grpcTarget: gitops-service:7909
-  protocol: "GRPC"
+  protocol: "HTTP1"
   versionFileLocation: "/app/VERSIONS/AGENT"
   dockerImageRepo: "harness/gitops-agent"
   minimumV2Version: "0.33.0"
