@@ -15,7 +15,7 @@ data:
   GITOPS_SERVICE_HTTP_BIND: {{ .Values.service.httpBind | quote}}
   GITOPS_SERVICE_HTTP_HOST: {{ .Values.global.loadbalancerURL }}/gitops
   AGENT_GRPC_AUTHORITY: {{ .Values.global.loadbalancerURL }}
-  AGENT_GRPC_TARGET: {{ .Values.host }}:443
+  AGENT_GRPC_TARGET: {{ .Values.global.loadbalancerURL }}:443
   DROP_ALL_INDEXES_ONCE: {{.Values.mongo.dropAllIndexesOnce | quote}}
   ENABLE_CDN: {{.Values.enableCDN | quote}}
   GITOPS_AGENT_VERSION_FILE_LOCATION: {{.Values.agent.versionFileLocation | quote}}
