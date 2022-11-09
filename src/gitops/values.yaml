@@ -117,6 +117,37 @@ agentDockerImage:
     tag: ""
     digest: ""
 
+argoAppSetImage:
+  image:
+    registry: quay.io
+    repository: argoproj/argocd-applicationset
+    pullPolicy: IfNotPresent
+    tag: "v0.4.1"
+    digest: ""
+
+argoCDImage:
+  image:
+    registry: quay.io
+    repository: argoproj/argocd
+    pullPolicy: IfNotPresent
+    tag: "v2.3.4"
+    digest: ""
+
+agentHAProxyImage:
+  image:
+    registry: docker.io
+    repository: haproxy
+    pullPolicy: IfNotPresent
+    tag: "2.0.25-alpine"
+    digest: ""
+
+agentRedisImage:
+  image:
+    registry: docker.io
+    repository: redis
+    pullPolicy: IfNotPresent
+    tag: "6.2.6-alpine"
+    digest: ""
 
 accessControlService:
   basePath: ""
