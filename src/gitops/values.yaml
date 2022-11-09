@@ -104,7 +104,6 @@ global:
     virtualService:
       gateways:
       hosts:
-  host: "test"
   loadbalancerURL: "https://test"
   accessControlService:
     basePath: ""
@@ -114,9 +113,7 @@ global:
 #      name: harness-secrets
 #      key: aclSecret
   agent:
-    httpTarget: gitops-service:7908
-    grpcTarget: gitops-service:7909
-    protocol: "GRPC"
+    protocol: "HTTP1"
     versionFileLocation: "/app/VERSIONS/AGENT"
     upgraderImage: "harness/upgrader:latest"
     dockerImageRepo: "harness/gitops-agent"
