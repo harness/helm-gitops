@@ -127,8 +127,6 @@ accessControlService:
 #      name: harness-secrets
 #      key: aclSecret
 agent:
-  httpTarget: gitops-service:7908
-  grpcTarget: gitops-service:7909
   protocol: "HTTP1"
   versionFileLocation: "/app/VERSIONS/AGENT"
   dockerImageRepo: "harness/gitops-agent"
