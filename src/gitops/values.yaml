@@ -86,6 +86,14 @@ waitForInitContainer:
     tag: "latest"
     digest: ""
 
+upgraderImage:
+  image:
+    registry: docker.io 
+    repository: harness/upgrader
+    pullPolicy: Always 
+    tag: "latest"
+    digest: ""
+
 global:
   ingress:
     enabled: false
