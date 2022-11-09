@@ -4,6 +4,22 @@
 
 replicaCount: 1
 
+
+global:
+  ingress:
+    enabled: false
+  istio:
+    enabled: false
+    gateway:
+      create: false
+    virtualService:
+      gateways:
+      hosts:
+
+  host: "test"
+  loadbalancerURL: "https://test"
+
+
 image:
   registry: docker.io
   repository: harness/gitops-service-signed
@@ -18,7 +34,7 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false 
+  create: false
   # Annotations to add to the service account
   annotations: { }
   # The name of the service account to use.
@@ -88,78 +104,71 @@ waitForInitContainer:
 
 upgraderImage:
   image:
-    registry: docker.io 
+    registry: docker.io
     repository: harness/upgrader
-    pullPolicy: Always 
+    pullPolicy: Always
     tag: "latest"
     digest: ""
 
-global:
-  ingress:
-    enabled: false
-  istio:
-    enabled: true
-    gateway:
-      create: true
-    virtualService:
-      gateways:
-      hosts:
-  host: "test"
-  loadbalancerURL: "https://test"
-  accessControlService:
-    basePath: ""
-    host: ""
-    skipSecureVerify: "true"
+agentDockerImage:
+  image:
+    registry: docker.io
+    repository: harness/gitops-agent
+    pullPolicy: Always
+    tag: ""
+    digest: ""
+
+
+accessControlService:
+  basePath: ""
+  host: ""
+  skipSecureVerify: "true"
 #    secret:
 #      name: harness-secrets
 #      key: aclSecret
-  agent:
-    httpTarget: gitops-service:7908
-    grpcTarget: gitops-service:7909
-    protocol: "GRPC"
-    versionFileLocation: "/app/VERSIONS/AGENT"
-    upgraderImage: "harness/upgrader:latest"
-    dockerImageRepo: "harness/gitops-agent"
-    minimumV2Version: "0.33.0"
-    enableAuth: "false"
+agent:
+  httpTarget: gitops-service:7908
+  grpcTarget: gitops-service:7909
+  protocol: "GRPC"
+  versionFileLocation: "/app/VERSIONS/AGENT"
+  dockerImageRepo: "harness/gitops-agent"
+  minimumV2Version: "0.33.0"
+  enableAuth: "false"
+certPath: ""
+enableCDN: "false"
+eventsFrameworkEnvNamespace: ""
+gitopsHttpAcme: "false"
+gitopsTaskLongPolling: "true"
+grpcPort: 7909
+keyPath: ""
+logFormat: ""
+metricsPort: 6565
+mongo:
+  enableReflection: "false"
+  dbName: "harness-gitops"
+  dropAllIndexesOnce: "false"
+  username:
+    name: harness-secrets
+    key: mongodbUsername
+  password:
+    name: mongodb-replicaset-chart
+    key: mongodb-root-password
+timescale:
   certPath: ""
-  enableCDN: "false"
-  eventsFrameworkEnvNamespace: ""
-  gitopsHttpAcme: "false"
-  gitopsTaskLongPolling: "true"
-  grpcPort: 7909
-  keyPath: ""
-  logFormat: ""
-  metricsPort: 6565
-  mongo:
-    enableReflection: "false"
-    dbName: "harness-gitops"
-    dropAllIndexesOnce: "false"
-    username:
-      name: harness-secrets
-      key: mongodbUsername
-    password:
-      name: mongodb-replicaset-chart
-      key: mongodb-root-password
-  timescale:
-    certPath: ""
-    dbName: "harness-gitops"
-    logLevel: 2
-    useTls: "false"
-    password:
-      name: harness-secrets
-      key: timescaledbPostgresPassword
-  platformService:
-    url: ""
-    skipSecureVerify: "true"
-  redis:
-    masterName: "harness-redis"
-    password:
-      name: harness-secrets
-      key: redisPassword
-    sslCAPath: ""
-    sslEnabled: "false"
-  versionFileLocation: "/app/VERSIONS/SERVER"
-
-
-
+  dbName: "harness-gitops"
+  logLevel: 2
+  useTls: "false"
+  password:
+    name: harness-secrets
+    key: timescaledbPostgresPassword
+platformService:
+  url: ""
+  skipSecureVerify: "true"
+redis:
+  masterName: "harness-redis"
+  password:
+    name: harness-secrets
+    key: redisPassword
+  sslCAPath: ""
+  sslEnabled: "false"
+versionFileLocation: "/app/VERSIONS/SERVER"

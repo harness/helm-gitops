@@ -60,18 +60,18 @@ spec:
             - name: MONGODB_USERNAME
               valueFrom:
                   secretKeyRef:
-                    name: {{ .Values.global.mongo.username.name }}
-                    key: {{ .Values.global.mongo.username.key }}
+                    name: {{ .Values.mongo.username.name }}
+                    key: {{ .Values.mongo.username.key }}
             - name: MONGODB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.global.mongo.password.name }}
-                  key: {{ .Values.global.mongo.password.key }}
+                  name: {{ .Values.mongo.password.name }}
+                  key: {{ .Values.mongo.password.key }}
             - name: TIMESCALE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.global.timescale.password.name }}
-                  key: {{ .Values.global.timescale.password.key }}
+                  name: {{ .Values.timescale.password.name }}
+                  key: {{ .Values.timescale.password.key }}
             - name: GITOPS_SERVICE_TIMESCALE_URL
               value:  postgres://postgres:$(TIMESCALE_PASSWORD)@timescaledb-single-chart.{{ .Release.Namespace }}:5432/harness_gitops?sslmode=disable
             - name: GITOPS_SERVICE_MONGODB_URL
