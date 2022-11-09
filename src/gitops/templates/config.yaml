@@ -9,7 +9,7 @@ data:
   ACCESS_CONTROL_SERVICE_SKIPSECUREVERIFY: {{.Values.accessControlService.skipSecureVerify | quote}}
   AGENT_DOCKER_IMAGE_REPO: {{include "gitops.images.image" (dict "imageRoot" .Values.agentDockerImage.image "global" .Values.global) | quote}}
   AGENT_ENABLE_AUTH: {{.Values.agent.enableAuth | quote}}
-  AGENT_HTTP_TARGET: {{.Values.agent.httpTarget | quote}}
+  AGENT_HTTP_TARGET: {{ .Values.global.loadbalancerURL }}/gitops
   AGENT_PROTOCOL: {{.Values.agent.protocol | quote}}
   EVENTS_FRAMEWORK_ENV_NAMESPACE: {{.Values.eventsFrameworkEnvNamespace | quote}}
   GITOPS_SERVICE_HTTP_BIND: {{ .Values.service.httpBind | quote}}
