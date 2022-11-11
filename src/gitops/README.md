@@ -69,7 +69,7 @@ Harness GitOps
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"harness/gitops-service-signed"` |  |
-| image.tag | string | `"v0.54.0"` |  |
+| image.tag | string | `"v0.54.3"` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress.className | string | `"gitops-http-ingress"` |  |
 | ingress.hosts[0].host | string | `""` |  |
