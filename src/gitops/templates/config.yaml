@@ -17,7 +17,7 @@ data:
   AGENT_REDIS_IMAGE_REPO: {{include "common.images.image" (dict "imageRoot" .Values.agentRedisImage.image "global" .Values.global)  | quote}}
   EVENTS_FRAMEWORK_ENV_NAMESPACE: {{ .Release.Namespace | quote}}
   GITOPS_SERVICE_HTTP_BIND: {{ .Values.service.httpBind | quote}}
-  GITOPS_SERVICE_HTTP_HOST: {{ .fValues.global.loadbalancerURL }}/gitops
+  GITOPS_SERVICE_HTTP_HOST: {{ .Values.global.loadbalancerURL }}/gitops
   AGENT_GRPC_AUTHORITY: {{ .Values.global.loadbalancerURL }}
   AGENT_GRPC_TARGET: {{ .Values.global.loadbalancerURL }}:443
   DROP_ALL_INDEXES_ONCE: {{.Values.mongo.dropAllIndexesOnce | quote}}
