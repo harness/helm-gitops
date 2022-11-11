@@ -183,7 +183,7 @@ mongo:
     key: mongodb-root-password
 timescale:
   certPath: ""
-  dbName: "harness-gitops"
+  dbName: "harness_gitops"
   logLevel: 3
   useTls: "false"
   password:
