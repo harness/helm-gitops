@@ -24,7 +24,7 @@ image:
   repository: harness/gitops-service-signed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.54.0"
+  tag: "v0.54.3"
   digest: ""
 
 imagePullSecrets: [ ]
