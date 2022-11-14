@@ -27,7 +27,7 @@ image:
   tag: "v0.54.3"
   digest: ""
 
-imagePullSecrets: [ ]
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
