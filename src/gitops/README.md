@@ -14,8 +14,8 @@ Harness GitOps
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| accessControlService.basePath | string | `""` |  |
-| accessControlService.host | string | `""` |  |
+| accessControlService.basePath | string | `"authz/api/"` |  |
+| accessControlService.host | string | `"nginx-ingress-controller.ingress-nginx.svc.cluster.local"` |  |
 | accessControlService.skipSecureVerify | string | `"true"` |  |
 | affinity | object | `{}` |  |
 | agent.dockerImageRepo | string | `"harness/gitops-agent"` |  |
@@ -54,7 +54,7 @@ Harness GitOps
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | certPath | string | `""` |  |
 | enableCDN | string | `"false"` |  |
-| eventsFrameworkEnvNamespace | string | `""` |  |
+| eventsFrameworkEnvNamespace | string | `"free"` |  |
 | fullnameOverride | string | `""` |  |
 | gitopsHttpAcme | string | `"false"` |  |
 | gitopsTaskLongPolling | string | `"true"` |  |
@@ -80,7 +80,7 @@ Harness GitOps
 | metricsPort | int | `6565` |  |
 | mongo.dbName | string | `"harness-gitops"` |  |
 | mongo.dropAllIndexesOnce | string | `"false"` |  |
-| mongo.enableReflection | string | `"false"` |  |
+| mongo.enableReflection | string | `"true"` |  |
 | mongo.password.key | string | `"mongodb-root-password"` |  |
 | mongo.password.name | string | `"mongodb-replicaset-chart"` |  |
 | mongo.username.key | string | `"mongodbUsername"` |  |
@@ -88,7 +88,7 @@ Harness GitOps
 | nameOverride | string | `""` |  |
 | nodeSelector | object | `{}` |  |
 | platformService.skipSecureVerify | string | `"true"` |  |
-| platformService.url | string | `""` |  |
+| platformService.url | string | `"https://nginx-ingress-controller.ingress-nginx.svc.cluster.local/ng/api"` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | redis.masterName | string | `"harness-redis"` |  |
@@ -97,10 +97,10 @@ Harness GitOps
 | redis.sslCAPath | string | `""` |  |
 | redis.sslEnabled | string | `"false"` |  |
 | replicaCount | int | `1` |  |
-| resources.limits.cpu | string | `"100m"` |  |
-| resources.limits.memory | string | `"128Mi"` |  |
-| resources.requests.cpu | string | `"100m"` |  |
-| resources.requests.memory | string | `"128Mi"` |  |
+| resources.limits.cpu | int | `2` |  |
+| resources.limits.memory | string | `"256Mi"` |  |
+| resources.requests.cpu | int | `2` |  |
+| resources.requests.memory | string | `"256Mi"` |  |
 | securityContext | object | `{}` |  |
 | service.grpcServerPort | int | `7909` |  |
 | service.httpBind | string | `":7908"` |  |
@@ -111,8 +111,8 @@ Harness GitOps
 | serviceAccount.create | bool | `false` |  |
 | serviceAccount.name | string | `"harness-default"` |  |
 | timescale.certPath | string | `""` |  |
-| timescale.dbName | string | `"harness-gitops"` |  |
-| timescale.logLevel | int | `2` |  |
+| timescale.dbName | string | `"harness_gitops"` |  |
+| timescale.logLevel | int | `3` |  |
 | timescale.password.key | string | `"timescaledbPostgresPassword"` |  |
 | timescale.password.name | string | `"harness-secrets"` |  |
 | timescale.useTls | string | `"false"` |  |
