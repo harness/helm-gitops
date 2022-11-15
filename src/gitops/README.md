@@ -59,6 +59,9 @@ Harness GitOps
 | gitopsHttpAcme | string | `"false"` |  |
 | gitopsTaskLongPolling | string | `"true"` |  |
 | global.ingress.enabled | bool | `false` |  |
+| global.ingress.hosts[0] | string | `"*"` |  |
+| global.ingress.objects.annotations | object | `{}` |  |
+| global.internalIngress.enabled | bool | `true` |  |
 | global.istio.enabled | bool | `false` |  |
 | global.istio.gateway.create | bool | `false` |  |
 | global.istio.virtualService.gateways | string | `nil` |  |
@@ -71,10 +74,10 @@ Harness GitOps
 | image.repository | string | `"harness/gitops-service-signed"` |  |
 | image.tag | string | `"v0.54.3"` |  |
 | imagePullSecrets | list | `[]` |  |
-| ingress.className | string | `"gitops-http-ingress"` |  |
+| ingress.className | string | `"internal"` |  |
 | ingress.hosts[0].host | string | `""` |  |
 | ingress.hosts[0].paths[0].path | string | `"/gitops"` |  |
-| ingress.hosts[0].paths[0].pathType | string | `"Prefix"` |  |
+| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | keyPath | string | `""` |  |
 | logFormat | string | `""` |  |
 | metricsPort | int | `6565` |  |

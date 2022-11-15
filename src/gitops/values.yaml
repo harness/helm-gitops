@@ -7,7 +7,11 @@ replicaCount: 1
 
 global:
   ingress:
+    hosts:
+      - "*"
     enabled: false
+    objects:
+      annotations: {}
   istio:
     enabled: false
     gateway:
@@ -15,6 +19,9 @@ global:
     virtualService:
       gateways:
       hosts:
+
+  internalIngress:
+    enabled: true
 
   loadbalancerURL: "https://test"
 
@@ -86,12 +93,12 @@ tolerations: []
 affinity: {}
 
 ingress:
-  className: "gitops-http-ingress"
+  className: "internal"
   hosts:
     - host: ""
       paths:
         - path: /gitops
-          pathType: Prefix
+          pathType: ImplementationSpecific
 
 waitForInitContainer:
   image:
