@@ -29,6 +29,7 @@ jobs:
       - name: Add Helm repos
         run: |
           helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add harness-common https://harness.github.io/helm-common
 
       - name: Run Chart Releaser
         uses: helm/chart-releaser-action@v1.4.0
