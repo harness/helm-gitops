@@ -15,6 +15,7 @@ data:
   AGENT_ARGO_CD_IMAGE_REPO: {{include "common.images.image" (dict "imageRoot" .Values.argoCDImage.image "global" .Values.global)  | quote}}
   AGENT_HA_PROXY_IMAGE_REPO: {{include "common.images.image" (dict "imageRoot" .Values.agentHAProxyImage.image "global" .Values.global)  | quote}}
   AGENT_REDIS_IMAGE_REPO: {{include "common.images.image" (dict "imageRoot" .Values.agentRedisImage.image "global" .Values.global)  | quote}}
+  AGENT_HTTP_TLS_ENABLED: {{.Values.agent.tlsEnabled | quote}}
   EVENTS_FRAMEWORK_ENV_NAMESPACE: {{ .Release.Namespace | quote}}
   GITOPS_SERVICE_HTTP_BIND: {{ .Values.service.httpBind | quote}}
   GITOPS_SERVICE_HTTP_HOST: {{ .Values.global.loadbalancerURL }}/gitops

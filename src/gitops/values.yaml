@@ -31,7 +31,7 @@ image:
   repository: harness/gitops-service-signed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.54.3"
+  tag: "v0.54.5"
   digest: ""
 
 imagePullSecrets: []
@@ -169,6 +169,7 @@ agent:
   dockerImageRepo: "harness/gitops-agent"
   minimumV2Version: "0.33.0"
   enableAuth: "false"
+  tlsEnabled: "false"
 certPath: ""
 enableCDN: "false"
 eventsFrameworkEnvNamespace: "free"
