@@ -10,7 +10,7 @@ spec:
   ports:
     - name: gitops-grpc
       port: {{.Values.service.grpcServerPort}}
-      protocol: TCP 
+      protocol: TCP
       targetPort: gitops-grpc
     - name: gitops-http
       port: {{.Values.service.httpServerPort}}

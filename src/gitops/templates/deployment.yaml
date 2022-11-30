@@ -13,8 +13,9 @@ spec:
       {{- include "gitops.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
@@ -27,22 +28,64 @@ spec:
       serviceAccountName: {{ include "gitops.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: wait-for-mongo
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
+          imagePullPolicy: IfNotPresent
+          args:
+            - "pod"
+            - "-lapp=mongodb-replicaset"
+        - name: wait-for-timescale
+          image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
+          imagePullPolicy: IfNotPresent
+          args:
+            - "pod"
+            - "-lapp=timescaledb-single-chart"
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image:  {{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: gitops-http
-              containerPort: {{.Values.httpServerPort}}
+              containerPort: {{.Values.service.httpServerPort}}
               protocol: TCP
             - name: gitops-grpc
-              containerPort: {{.Values.grpcServerPort}}
+              containerPort: {{.Values.service.grpcServerPort}}
               protocol: TCP
           envFrom:
-          - configMapRef:
-              name: {{.Values.name}}
+            - configMapRef:
+                name: harness-gitops-config
+          env:
+            - name: MONGODB_USERNAME
+              valueFrom:
+                  secretKeyRef:
+                    name: {{ .Values.mongo.username.name }}
+                    key: {{ .Values.mongo.username.key }}
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.mongo.password.name }}
+                  key: {{ .Values.mongo.password.key }}
+            - name: TIMESCALE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.timescale.password.name }}
+                  key: {{ .Values.timescale.password.key }}
+            - name: GITOPS_SERVICE_TIMESCALE_URL
+              value:  postgres://postgres:$(TIMESCALE_PASSWORD)@timescaledb-single-chart.{{ .Release.Namespace }}:5432/harness_gitops?sslmode=disable
+            - name: GITOPS_SERVICE_MONGODB_URL
+              value: {{ include "harnesscommon.database.mongo" (dict "database" "harness-gitops" "context" $) }}
+            - name: ACL_SECRET
+              value: ""
+            - name: LOGGING_SVC_ACC_JSON_KEY
+              value: ""
+            - name: IDENTITY_SERVICE_SECRET
+              value: ""
+            - name: JWT_SECRET
+              value: ""
+
           livenessProbe:
             httpGet:
               path: /healthz

@@ -4,12 +4,34 @@
 
 replicaCount: 1
 
+
+global:
+  ingress:
+    hosts:
+      - "*"
+    enabled: false
+    objects:
+      annotations: {}
+  istio:
+    enabled: false
+    gateway:
+      create: false
+    virtualService:
+      gateways:
+      hosts:
+
+  internalIngress:
+    enabled: true
+
+  loadbalancerURL: "https://test"
+
+
 image:
   registry: docker.io
-  repository: nginx
+  repository: harness/gitops-service-signed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "v0.54.5"
   digest: ""
 
 imagePullSecrets: []
@@ -18,42 +40,44 @@ fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
-  create: true
+  create: false
   # Annotations to add to the service account
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  name: "harness-default"
 
 podAnnotations: {}
 
 podSecurityContext: {}
-  # fsGroup: 2000
+# fsGroup: 2000
 
 securityContext: {}
   # capabilities:
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# runAsNonRoot: true
+# runAsUser: 1000
 
 service:
   type: ClusterIP
-  httpServerPort: 80
-  grpcServerPort: 80
+  httpServerPort: 7908
+  grpcServerPort: 7909
+  port: 80
+  httpBind: ":7908"
 
-resources: {}
+resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  limits:
+    cpu: 2
+    memory: 256Mi
+  requests:
+    cpu: 2
+    memory: 256Mi
 
 autoscaling:
   enabled: false
@@ -67,3 +91,120 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+ingress:
+  className: "internal"
+  hosts:
+    - host: ""
+      paths:
+        - path: /gitops
+          pathType: ImplementationSpecific
+
+waitForInitContainer:
+  image:
+    registry: docker.io
+    repository: harness/helm-init-container
+    pullPolicy: IfNotPresent
+    tag: "latest"
+    digest: ""
+
+upgraderImage:
+  image:
+    registry: docker.io
+    repository: harness/upgrader
+    pullPolicy: Always
+    tag: "latest"
+    digest: ""
+
+agentDockerImage:
+  image:
+    registry: docker.io
+    repository: harness/gitops-agent
+    pullPolicy: Always
+    tag: ""
+    digest: ""
+
+argoAppSetImage:
+  image:
+    registry: quay.io
+    repository: argoproj/argocd-applicationset
+    pullPolicy: IfNotPresent
+    tag: "v0.4.1"
+    digest: ""
+
+argoCDImage:
+  image:
+    registry: quay.io
+    repository: argoproj/argocd
+    pullPolicy: IfNotPresent
+    tag: "v2.3.4"
+    digest: ""
+
+agentHAProxyImage:
+  image:
+    registry: docker.io
+    repository: haproxy
+    pullPolicy: IfNotPresent
+    tag: "2.0.25-alpine"
+    digest: ""
+
+agentRedisImage:
+  image:
+    registry: docker.io
+    repository: redis
+    pullPolicy: IfNotPresent
+    tag: "6.2.6-alpine"
+    digest: ""
+
+accessControlService:
+  basePath: "authz/api/"
+  host: "nginx-ingress-controller.ingress-nginx.svc.cluster.local"
+  skipSecureVerify: "true"
+#    secret:
+#      name: harness-secrets
+#      key: aclSecret
+agent:
+  protocol: "HTTP1"
+  versionFileLocation: "/app/VERSIONS/AGENT"
+  dockerImageRepo: "harness/gitops-agent"
+  minimumV2Version: "0.33.0"
+  enableAuth: "false"
+  tlsEnabled: "false"
+certPath: ""
+enableCDN: "false"
+eventsFrameworkEnvNamespace: "free"
+gitopsHttpAcme: "false"
+gitopsTaskLongPolling: "true"
+grpcPort: 7909
+keyPath: ""
+logFormat: ""
+metricsPort: 6565
+mongo:
+  enableReflection: "true"
+  dbName: "harness-gitops"
+  dropAllIndexesOnce: "false"
+  username:
+    name: harness-secrets
+    key: mongodbUsername
+  password:
+    name: mongodb-replicaset-chart
+    key: mongodb-root-password
+timescale:
+  certPath: ""
+  dbName: "harness_gitops"
+  logLevel: 3
+  useTls: "false"
+  password:
+    name: harness-secrets
+    key: timescaledbPostgresPassword
+platformService:
+  url: "https://nginx-ingress-controller.ingress-nginx.svc.cluster.local/ng/api"
+  skipSecureVerify: "true"
+redis:
+  masterName: "harness-redis"
+  password:
+    name: harness-secrets
+    key: redisPassword
+  sslCAPath: ""
+  sslEnabled: "false"
+versionFileLocation: "/app/VERSIONS/SERVER"

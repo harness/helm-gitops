@@ -1,6 +1,6 @@
-{{- if .Values.global.ingress.enabled -}}
+{{- if .Values.global.internalIngress.enabled }}
 {{- $fullName := include "gitops.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
+{{- $svcPort := .Values.service.httpServerPort -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
@@ -20,29 +20,15 @@ metadata:
     {{- include "gitops.labels" . | nindent 4 }}
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
-  {{- with .Values.global.ingress.objects.annotations }}
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
 spec:
-  {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
-  ingressClassName: {{ .Values.global.ingress.className }}
-  {{- end }}
-  {{- if .Values.global.ingress.tls }}
-  tls:
-    {{- range .Values.global.ingress.tls }}
-    - hosts:
-        {{- range .hosts }}
-        - {{ . | quote }}
-        {{- end }}
-      secretName: {{ .secretName }}
-    {{- end }}
-  {{- end }}
+  ingressClassName: "internal"
   rules:
-    {{- range .Values.global.ingress.hosts }}
+    {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
-          - path: /gitops
+          {{- range .paths }}
+          - path: {{ .path }}
             {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
             pathType: {{ .pathType }}
             {{- end }}
@@ -56,5 +42,6 @@ spec:
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
               {{- end }}
+          {{- end }}
     {{- end }}
 {{- end }}
