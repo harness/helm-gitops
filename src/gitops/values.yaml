@@ -21,7 +21,7 @@ global:
       hosts:
 
   internalIngress:
-    enabled: true
+    enabled: false
 
   loadbalancerURL: "https://test"
 
