@@ -75,6 +75,8 @@ spec:
                   key: {{ .Values.timescale.password.key }}
             - name: GITOPS_SERVICE_TIMESCALE_URL
               value:  postgres://postgres:$(TIMESCALE_PASSWORD)@timescaledb-single-chart.{{ .Release.Namespace }}:5432/harness_gitops?sslmode=disable
+            - name: GITOPS_SMP_ADMIN_TIMESCALE_URL
+              value:  postgres://postgres:$(TIMESCALE_PASSWORD)@timescaledb-single-chart.{{ .Release.Namespace }}:5432/?sslmode=disable
             - name: GITOPS_SERVICE_MONGODB_URL
               value: {{ include "harnesscommon.database.mongo" (dict "database" "harness-gitops" "context" $) }}
             - name: ACL_SECRET
