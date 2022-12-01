@@ -3,6 +3,20 @@ entries:
   gitops:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2022-12-01T16:25:10.344001621Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: Harness GitOps
+    digest: 2fdcf4f99ccc939b9ce95d3fc2b86383da281905b08f6ebec6e717074f0a3d14
+    name: gitops
+    type: application
+    urls:
+    - https://github.com/harness/helm-gitops/releases/download/gitops-0.1.4/gitops-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2022-11-30T19:06:51.455394056Z"
     dependencies:
     - name: harness-common
@@ -29,4 +43,4 @@ entries:
     urls:
     - https://github.com/harness/helm-gitops/releases/download/gitops-0.1.2/gitops-0.1.2.tgz
     version: 0.1.2
-generated: "2022-11-30T19:06:51.455401256Z"
+generated: "2022-12-01T16:25:10.344011421Z"
