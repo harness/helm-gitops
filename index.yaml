@@ -57,4 +57,15 @@ entries:
     urls:
     - https://github.com/harness/helm-gitops/releases/download/gitops-0.1.2/gitops-0.1.2.tgz
     version: 0.1.2
-generated: "2022-12-07T19:11:18.75173175Z"
+  remote-service-account:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-12-07T19:13:02.512039715Z"
+    description: Harness GitOps Remote Service Account
+    digest: d2c08177fd3fa3e4435a32e81f19651396531371da28d98766ded272d93c2568
+    name: remote-service-account
+    type: application
+    urls:
+    - https://github.com/harness/helm-gitops/releases/download/remote-service-account-0.0.3/remote-service-account-0.0.3.tgz
+    version: 0.0.3
+generated: "2022-12-07T19:13:02.512053115Z"
