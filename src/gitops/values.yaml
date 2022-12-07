@@ -170,6 +170,7 @@ agent:
   minimumV2Version: "0.33.0"
   enableAuth: "false"
   tlsEnabled: "false"
+  customImage: "true"
 certPath: ""
 enableCDN: "false"
 eventsFrameworkEnvNamespace: "free"
