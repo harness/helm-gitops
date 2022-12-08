@@ -1,6 +1,6 @@
 # gitops
 
-![Version: 0.1.5](https://img.shields.io/badge/Version-0.1.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.1.7](https://img.shields.io/badge/Version-0.1.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 Harness GitOps
 
@@ -18,6 +18,7 @@ Harness GitOps
 | accessControlService.host | string | `"nginx-ingress-controller.ingress-nginx.svc.cluster.local"` |  |
 | accessControlService.skipSecureVerify | string | `"true"` |  |
 | affinity | object | `{}` |  |
+| agent.customImage | string | `"true"` |  |
 | agent.dockerImageRepo | string | `"harness/gitops-agent"` |  |
 | agent.enableAuth | string | `"false"` |  |
 | agent.minimumV2Version | string | `"0.33.0"` |  |
@@ -25,26 +26,31 @@ Harness GitOps
 | agent.tlsEnabled | string | `"false"` |  |
 | agent.versionFileLocation | string | `"/app/VERSIONS/AGENT"` |  |
 | agentDockerImage.image.digest | string | `""` |  |
+| agentDockerImage.image.imagePullSecrets | list | `[]` |  |
 | agentDockerImage.image.pullPolicy | string | `"Always"` |  |
 | agentDockerImage.image.registry | string | `"docker.io"` |  |
 | agentDockerImage.image.repository | string | `"harness/gitops-agent"` |  |
 | agentDockerImage.image.tag | string | `""` |  |
 | agentHAProxyImage.image.digest | string | `""` |  |
+| agentHAProxyImage.image.imagePullSecrets | list | `[]` |  |
 | agentHAProxyImage.image.pullPolicy | string | `"IfNotPresent"` |  |
 | agentHAProxyImage.image.registry | string | `"docker.io"` |  |
 | agentHAProxyImage.image.repository | string | `"haproxy"` |  |
 | agentHAProxyImage.image.tag | string | `"2.0.25-alpine"` |  |
 | agentRedisImage.image.digest | string | `""` |  |
+| agentRedisImage.image.imagePullSecrets | list | `[]` |  |
 | agentRedisImage.image.pullPolicy | string | `"IfNotPresent"` |  |
 | agentRedisImage.image.registry | string | `"docker.io"` |  |
 | agentRedisImage.image.repository | string | `"redis"` |  |
 | agentRedisImage.image.tag | string | `"6.2.6-alpine"` |  |
 | argoAppSetImage.image.digest | string | `""` |  |
+| argoAppSetImage.image.imagePullSecrets | list | `[]` |  |
 | argoAppSetImage.image.pullPolicy | string | `"IfNotPresent"` |  |
 | argoAppSetImage.image.registry | string | `"quay.io"` |  |
 | argoAppSetImage.image.repository | string | `"argoproj/argocd-applicationset"` |  |
 | argoAppSetImage.image.tag | string | `"v0.4.1"` |  |
 | argoCDImage.image.digest | string | `""` |  |
+| argoCDImage.image.imagePullSecrets | list | `[]` |  |
 | argoCDImage.image.pullPolicy | string | `"IfNotPresent"` |  |
 | argoCDImage.image.registry | string | `"quay.io"` |  |
 | argoCDImage.image.repository | string | `"argoproj/argocd"` |  |
@@ -70,6 +76,7 @@ Harness GitOps
 | global.loadbalancerURL | string | `"https://test"` |  |
 | grpcPort | int | `7909` |  |
 | image.digest | string | `""` |  |
+| image.imagePullSecrets | list | `[]` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"harness/gitops-service-signed"` |  |
@@ -122,12 +129,14 @@ Harness GitOps
 | timescale.useTls | string | `"false"` |  |
 | tolerations | list | `[]` |  |
 | upgraderImage.image.digest | string | `""` |  |
+| upgraderImage.image.imagePullSecrets | list | `[]` |  |
 | upgraderImage.image.pullPolicy | string | `"Always"` |  |
 | upgraderImage.image.registry | string | `"docker.io"` |  |
 | upgraderImage.image.repository | string | `"harness/upgrader"` |  |
 | upgraderImage.image.tag | string | `"latest"` |  |
 | versionFileLocation | string | `"/app/VERSIONS/SERVER"` |  |
 | waitForInitContainer.image.digest | string | `""` |  |
+| waitForInitContainer.image.imagePullSecrets | list | `[]` |  |
 | waitForInitContainer.image.pullPolicy | string | `"IfNotPresent"` |  |
 | waitForInitContainer.image.registry | string | `"docker.io"` |  |
 | waitForInitContainer.image.repository | string | `"harness/helm-init-container"` |  |

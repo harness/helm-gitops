@@ -33,6 +33,7 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v0.54.5"
   digest: ""
+  imagePullSecrets: []
 
 imagePullSecrets: []
 nameOverride: ""
@@ -107,6 +108,7 @@ waitForInitContainer:
     pullPolicy: IfNotPresent
     tag: "latest"
     digest: ""
+    imagePullSecrets: []
 
 upgraderImage:
   image:
@@ -115,6 +117,7 @@ upgraderImage:
     pullPolicy: Always
     tag: "latest"
     digest: ""
+    imagePullSecrets: []
 
 agentDockerImage:
   image:
@@ -123,6 +126,7 @@ agentDockerImage:
     pullPolicy: Always
     tag: ""
     digest: ""
+    imagePullSecrets: []
 
 argoAppSetImage:
   image:
@@ -131,6 +135,7 @@ argoAppSetImage:
     pullPolicy: IfNotPresent
     tag: "v0.4.1"
     digest: ""
+    imagePullSecrets: []
 
 argoCDImage:
   image:
@@ -139,6 +144,7 @@ argoCDImage:
     pullPolicy: IfNotPresent
     tag: "v2.3.4"
     digest: ""
+    imagePullSecrets: []
 
 agentHAProxyImage:
   image:
@@ -147,6 +153,7 @@ agentHAProxyImage:
     pullPolicy: IfNotPresent
     tag: "2.0.25-alpine"
     digest: ""
+    imagePullSecrets: []
 
 agentRedisImage:
   image:
@@ -155,6 +162,7 @@ agentRedisImage:
     pullPolicy: IfNotPresent
     tag: "6.2.6-alpine"
     digest: ""
+    imagePullSecrets: []
 
 accessControlService:
   basePath: "authz/api/"
@@ -170,6 +178,7 @@ agent:
   minimumV2Version: "0.33.0"
   enableAuth: "false"
   tlsEnabled: "false"
+  customImage: "true"
 certPath: ""
 enableCDN: "false"
 eventsFrameworkEnvNamespace: "free"
