@@ -42,7 +42,7 @@ spec:
         paths:
           - backend:
               service:
-                name: {{ $fullName }}
+                name: gitops
                 port:
                   name: gitops-http
             pathType: ImplementationSpecific
