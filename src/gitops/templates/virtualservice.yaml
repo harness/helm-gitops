@@ -31,5 +31,5 @@ spec:
     - destination:
         port:
           number: {{ .Values.service.httpServerPort }}
-        host: {{ $fullName }}
+        host: gitops
 {{ end }}

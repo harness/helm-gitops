@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "gitops.fullname" . }}
+  name: gitops
   labels:
     {{- include "gitops.labels" . | nindent 4 }}
 spec:
