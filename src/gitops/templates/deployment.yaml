@@ -76,14 +76,6 @@ spec:
               value:  postgres://postgres:$(TIMESCALE_PASSWORD)@timescaledb-single-chart.{{ .Release.Namespace }}:5432/?sslmode=disable
             - name: GITOPS_SERVICE_MONGODB_URL
               value: {{ include "harnesscommon.database.mongo" (dict "database" "harness-gitops" "context" $) }}
-            - name: ACL_SECRET
-              value: ""
-            - name: LOGGING_SVC_ACC_JSON_KEY
-              value: ""
-            - name: IDENTITY_SERVICE_SECRET
-              value: ""
-            - name: JWT_SECRET
-              value: ""
 
           livenessProbe:
             httpGet:

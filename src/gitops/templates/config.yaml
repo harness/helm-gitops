@@ -7,6 +7,8 @@ data:
   ACCESS_CONTROL_SERVICE_BASEPATH: {{.Values.accessControlService.basePath | quote}}
   ACCESS_CONTROL_SERVICE_HOST: {{.Values.accessControlService.host | quote}}
   ACCESS_CONTROL_SERVICE_SKIPSECUREVERIFY: {{.Values.accessControlService.skipSecureVerify | quote}}
+  ACCESS_CONTROL_DEFAULT_SCHEMES: {{.Values.accessControlService.defaultSchemes | quote}}
+  ACL_SECRET: {{.Values.accessControlService.secret | quote}}
   AGENT_DOCKER_IMAGE_REPO: {{include "gitops.images.image" (dict "imageRoot" .Values.agentDockerImage.image "global" .Values.global) | quote}}
   AGENT_CUSTOM_IMAGE_TAG: {{ .Values.agent.customImage | quote}}
   AGENT_ENABLE_AUTH: {{.Values.agent.enableAuth | quote}}
@@ -41,8 +43,11 @@ data:
   GITOPS_SERVICE_TIMESCALE_LOG_LEVEL: {{.Values.timescale.logLevel | quote}}
   GITOPS_SERVICE_TIMESCALE_USE_TLS: {{.Values.timescale.useTls | quote}}
   GITOPS_SERVICE_VERSION_FILE_LOCATION: {{.Values.versionFileLocation | quote}}
+  IDENTITY_SERVICE_SECRET: {{.Values.identitySecret | quote}}
+  JWT_SECRET: {{.Values.jwtSecret | quote}}
   PLATFORM_SERVICE_URL: {{.Values.platformService.url | quote}}
   PLATFORM_SERVICE_SKIPSECUREVERIFY: {{.Values.platformService.skipSecureVerify | quote}}
+  PLATFORM_AUTH_SECRET: {{.Values.platformService.secret | quote}}
   REDIS_ENDPOINT: 'redis-sentinel-harness-announce-0.{{ .Release.Namespace }}:26379,redis-sentinel-harness-announce-1.{{ .Release.Namespace }}:26379,redis-sentinel-harness-announce-2.{{ .Release.Namespace }}:26379'
   REDIS_MASTER_NAME: {{.Values.redis.masterName | quote}}
   REDIS_SSL_ENABLED: {{.Values.redis.sslEnabled | quote}}
