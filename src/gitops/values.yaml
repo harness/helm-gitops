@@ -209,7 +209,7 @@ timescale:
     name: harness-secrets
     key: timescaledbPostgresPassword
 platformService:
-  url: "http://ng-manager:7090/"
+  url: "http://ng-manager:7090"
   skipSecureVerify: "true"
   secret: "IC04LYMBf1lDP5oeY4hupxd4HJhLmN6azUku3xEbeE3SUx5G3ZYzhbiwVtK4i7AmqyU9OZkwB4v8E9qM"
 redis:
