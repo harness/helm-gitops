@@ -166,8 +166,10 @@ agentRedisImage:
 
 accessControlService:
   basePath: "authz/api/"
-  host: "nginx-ingress-controller.ingress-nginx.svc.cluster.local"
+  host: "access-control:9006"
   skipSecureVerify: "true"
+  secret: "IC04LYMBf1lDP5oeY4hupxd4HJhLmN6azUku3xEbeE3SUx5G3ZYzhbiwVtK4i7AmqyU9OZkwB4v8E9qM"
+  defaultSchemes: "http"
 #    secret:
 #      name: harness-secrets
 #      key: aclSecret
@@ -207,8 +209,9 @@ timescale:
     name: harness-secrets
     key: timescaledbPostgresPassword
 platformService:
-  url: "https://nginx-ingress-controller.ingress-nginx.svc.cluster.local/ng/api"
+  url: "http://ng-manager:7090/"
   skipSecureVerify: "true"
+  secret: "IC04LYMBf1lDP5oeY4hupxd4HJhLmN6azUku3xEbeE3SUx5G3ZYzhbiwVtK4i7AmqyU9OZkwB4v8E9qM"
 redis:
   masterName: "harness-redis"
   password:
@@ -217,3 +220,5 @@ redis:
   sslCAPath: ""
   sslEnabled: "false"
 versionFileLocation: "/app/VERSIONS/SERVER"
+jwtSecret: "HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU="
+identitySecret: "HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU="
