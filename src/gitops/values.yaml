@@ -31,7 +31,7 @@ image:
   repository: harness/gitops-service-signed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.54.5"
+  tag: "v0.54.6"
   digest: ""
   imagePullSecrets: []
 
@@ -124,7 +124,7 @@ agentDockerImage:
     registry: docker.io
     repository: harness/gitops-agent
     pullPolicy: Always
-    tag: ""
+    tag: "v0.36.4"
     digest: ""
     imagePullSecrets: []
 
@@ -168,12 +168,9 @@ accessControlService:
   basePath: "api/"
   host: "access-control:9006"
   skipSecureVerify: "true"
-  secret: ""
-  # secret: "IC04LYMBf1lDP5oeY4hupxd4HJhLmN6azUku3xEbeE3SUx5G3ZYzhbiwVtK4i7AmqyU9OZkwB4v8E9qM"
+  secret: "IC04LYMBf1lDP5oeY4hupxd4HJhLmN6azUku3xEbeE3SUx5G3ZYzhbiwVtK4i7AmqyU9OZkwB4v8E9qM"
   defaultSchemes: "http"
-#    secret:
-#      name: harness-secrets
-#      key: aclSecret
+
 agent:
   protocol: "HTTP1"
   versionFileLocation: "/app/VERSIONS/AGENT"
@@ -212,8 +209,8 @@ timescale:
 platformService:
   url: "http://ng-manager:7090"
   skipSecureVerify: "true"
-  secret: ""
-  # secret: "IC04LYMBf1lDP5oeY4hupxd4HJhLmN6azUku3xEbeE3SUx5G3ZYzhbiwVtK4i7AmqyU9OZkwB4v8E9qM"
+  secret: "IC04LYMBf1lDP5oeY4hupxd4HJhLmN6azUku3xEbeE3SUx5G3ZYzhbiwVtK4i7AmqyU9OZkwB4v8E9qM"
+
 redis:
   masterName: "harness-redis"
   password:
@@ -222,7 +219,5 @@ redis:
   sslCAPath: ""
   sslEnabled: "false"
 versionFileLocation: "/app/VERSIONS/SERVER"
-jwtSecret: ""
-identitySecret: ""
-# jwtSecret: "HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU="
-# identitySecret: "HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU="
+jwtSecret: "HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU="
+identitySecret: "HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU="
