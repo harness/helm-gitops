@@ -3,6 +3,20 @@ entries:
   gitops:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2023-01-27T15:13:17.390502276Z"
+    dependencies:
+    - name: harness-common
+      repository: https://harness.github.io/helm-common
+      version: 1.x.x
+    description: Harness GitOps
+    digest: 50294fac12fcf2291ae4b1624587d1c7f822384ca9f171e48dfe6ee6a3c94e9e
+    name: gitops
+    type: application
+    urls:
+    - https://github.com/harness/helm-gitops/releases/download/gitops-0.1.11/gitops-0.1.11.tgz
+    version: 0.1.11
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2023-01-23T06:08:29.9363746Z"
     dependencies:
     - name: harness-common
@@ -124,4 +138,4 @@ entries:
     urls:
     - https://github.com/harness/helm-gitops/releases/download/remote-service-account-0.0.3/remote-service-account-0.0.3.tgz
     version: 0.0.3
-generated: "2023-01-23T06:08:29.936406601Z"
+generated: "2023-01-27T15:13:17.390538778Z"
