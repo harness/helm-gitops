@@ -4,12 +4,14 @@
 
 replicaCount: 1
 
-
 global:
   ingress:
-    hosts:
-      - "*"
     enabled: false
+    hosts:
+      - 'my-host.example.org'
+    tls:
+      enabled: false
+      secretName: harness-ssl
     objects:
       annotations: {}
   istio:
@@ -94,6 +96,7 @@ tolerations: []
 affinity: {}
 
 ingress:
+  annotations: {}
   className: "internal"
   hosts:
     - host: ""
