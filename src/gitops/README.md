@@ -1,6 +1,6 @@
 # gitops
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.4.0](https://img.shields.io/badge/Version-0.4.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 Harness GitOps
 
@@ -68,8 +68,10 @@ Harness GitOps
 | gitopsHttpAcme | string | `"false"` |  |
 | gitopsTaskLongPolling | string | `"true"` |  |
 | global.ingress.enabled | bool | `false` |  |
-| global.ingress.hosts[0] | string | `"*"` |  |
+| global.ingress.hosts[0] | string | `"my-host.example.org"` |  |
 | global.ingress.objects.annotations | object | `{}` |  |
+| global.ingress.tls.enabled | bool | `false` |  |
+| global.ingress.tls.secretName | string | `"harness-ssl"` |  |
 | global.internalIngress.enabled | bool | `false` |  |
 | global.istio.enabled | bool | `false` |  |
 | global.istio.gateway.create | bool | `false` |  |
@@ -83,8 +85,9 @@ Harness GitOps
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"harness/gitops-service-signed"` |  |
-| image.tag | string | `"v0.61.2"` |  |
+| image.tag | string | `"v0.62.4"` |  |
 | imagePullSecrets | list | `[]` |  |
+| ingress.annotations | object | `{}` |  |
 | ingress.className | string | `"internal"` |  |
 | ingress.hosts[0].host | string | `""` |  |
 | ingress.hosts[0].paths[0].path | string | `"/gitops"` |  |

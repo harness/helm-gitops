@@ -4,7 +4,6 @@
 
 replicaCount: 1
 
-
 global:
   database:
     postgres:
@@ -43,9 +42,12 @@ global:
       passwordKey: ""
       extraArgs: ""
   ingress:
-    hosts:
-      - "*"
     enabled: false
+    hosts:
+      - 'my-host.example.org'
+    tls:
+      enabled: false
+      secretName: harness-ssl
     objects:
       annotations: {}
   istio:
@@ -67,7 +69,7 @@ image:
   repository: harness/gitops-service-signed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.62.4"
+  tag: "v0.67.3"
   digest: ""
   imagePullSecrets: []
 
@@ -130,6 +132,7 @@ tolerations: []
 affinity: {}
 
 ingress:
+  annotations: {}
   className: "internal"
   hosts:
     - host: ""
