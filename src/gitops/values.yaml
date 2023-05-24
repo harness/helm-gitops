@@ -190,7 +190,7 @@ agentHAProxyImage:
     registry: docker.io
     repository: haproxy
     pullPolicy: IfNotPresent
-    tag: "haproxy:2.6.9-alpine"
+    tag: "2.6.9-alpine"
     digest: ""
     imagePullSecrets: []
 
