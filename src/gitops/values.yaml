@@ -163,7 +163,7 @@ agentDockerImage:
     registry: docker.io
     repository: harness/gitops-agent
     pullPolicy: Always
-    tag: "v0.42.0"
+    tag: "v0.52.2"
     digest: ""
     imagePullSecrets: []
 
@@ -181,7 +181,7 @@ argoCDImage:
     registry: quay.io
     repository: argoproj/argocd
     pullPolicy: IfNotPresent
-    tag: "v2.3.4"
+    tag: "v2.5.16"
     digest: ""
     imagePullSecrets: []
 
