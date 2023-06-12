@@ -34,12 +34,14 @@ spec:
             - "pod"
             - "-lapp=mongodb-replicaset"
         {{- end }}
+        {{- if .Values.global.database.timescaledb.installed }}
         - name: wait-for-timescale
           image: {{ include "common.images.image" (dict "imageRoot" .Values.waitForInitContainer.image "global" .Values.global) }}
           imagePullPolicy: IfNotPresent
           args:
             - "pod"
             - "-lapp=timescaledb-single-chart"
+        {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -58,6 +60,7 @@ spec:
                 name: harness-gitops-config
           env:
             {{- include "harnesscommon.dbconnection.mongoEnv" . | indent 12 }}
+            {{- if .Values.global.database.timescaledb.installed }}
             - name: TIMESCALE_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -67,9 +70,16 @@ spec:
               value:  postgres://postgres:$(TIMESCALE_PASSWORD)@timescaledb-single-chart.{{ .Release.Namespace }}:5432/harness_gitops?sslmode=disable
             - name: GITOPS_SMP_ADMIN_TIMESCALE_URL
               value:  postgres://postgres:$(TIMESCALE_PASSWORD)@timescaledb-single-chart.{{ .Release.Namespace }}:5432/?sslmode=disable
+            {{- else }}
+            {{ include "harnesscommon.dbconnection.dbenvuser" (dict "type" "timescale" "variableName" "TIMESCALE_USERNAME" "secret" .Values.global.database.timescaledb.secretName "userKey" .Values.global.database.timescaledb.userKey ) | nindent 12 }}
+            {{ include "harnesscommon.dbconnection.dbenvpassword" (dict "type" "timescale" "variableName" "TIMESCALE_PASSWORD" "secret" .Values.global.database.timescaledb.secretName "passwordKey" .Values.global.database.timescaledb.passwordKey ) | nindent 12 }}
+            - name: GITOPS_SERVICE_TIMESCALE_URL
+              value:  postgres://$(TIMESCALE_USERNAME):$(TIMESCALE_PASSWORD)@{{ index .Values.global.database.timescaledb.hosts 0}}/harness_gitops?sslmode=require
+            - name: GITOPS_SMP_ADMIN_TIMESCALE_URL
+              value: postgres://$(TIMESCALE_USERNAME):$(TIMESCALE_PASSWORD)@{{ index .Values.global.database.timescaledb.hosts 0}}/?sslmode=require
+            {{- end}}
             - name: GITOPS_SERVICE_MONGODB_URL
               value: {{ include "harnesscommon.dbconnection.mongoConnection" (dict "database" "harness-gitops" "context" $) }}
-
           livenessProbe:
             httpGet:
               path: /healthz
@@ -84,6 +94,18 @@ spec:
             periodSeconds: 30
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+        {{- if not .Values.global.database.timescaledb.installed }}
+          volumeMounts:
+            - name: timescaledb-cert
+              mountPath: /opt/harness/svc
+      volumes:
+      - name: timescaledb-cert
+        secret:
+          secretName: {{ .Values.global.database.timescaledb.certName }}
+          items:
+          - key: {{ .Values.global.database.timescaledb.certKey }}
+            path: timescaledb-pem
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

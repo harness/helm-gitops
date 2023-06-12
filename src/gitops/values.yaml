@@ -32,7 +32,7 @@ global:
       passwordKey: ""
       extraArgs: ""
     timescaledb:
-      installed: true
+      installed: false
       protocol: "jdbc:postgresql"
       # --  provide default values if mongo.installed is set to false
       hosts:
@@ -41,6 +41,8 @@ global:
       userKey: ""
       passwordKey: ""
       extraArgs: ""
+      certName: ""
+      certKey: ""
   ingress:
     enabled: false
     hosts:
