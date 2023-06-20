@@ -59,6 +59,7 @@ spec:
             - configMapRef:
                 name: harness-gitops-config
           env:
+            {{- include "harnesscommon.dbconnection.redisEnv" (dict "context" .Values.global.database.redis "userVariableName" "EVENTS_CONFIG_REDIS_USERNAME" "passwordVariableName" "REDIS_PASSWORD") | indent 12 }}
             {{- include "harnesscommon.dbconnection.mongoEnv" . | indent 12 }}
             {{- if .Values.global.database.timescaledb.installed }}
             - name: TIMESCALE_PASSWORD

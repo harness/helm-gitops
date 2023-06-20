@@ -53,7 +53,7 @@ data:
   PLATFORM_SERVICE_URL: {{.Values.platformService.url | quote}}
   PLATFORM_SERVICE_SKIPSECUREVERIFY: {{.Values.platformService.skipSecureVerify | quote}}
   PLATFORM_AUTH_SECRET: {{.Values.platformService.secret | quote}}
-  REDIS_ENDPOINT: 'redis-sentinel-harness-announce-0.{{ .Release.Namespace }}:26379,redis-sentinel-harness-announce-1.{{ .Release.Namespace }}:26379,redis-sentinel-harness-announce-2.{{ .Release.Namespace }}:26379'
+  REDIS_ENDPOINT: {{ include "harnesscommon.dbconnection.redisConnection" (dict "context" .Values.global.database.redis) }}
   REDIS_MASTER_NAME: {{.Values.redis.masterName | quote}}
   REDIS_SSL_ENABLED: {{.Values.redis.sslEnabled | quote}}
   REDIS_SSL_CA_CERT_PATH: {{.Values.redis.sslCAPath | quote}}
