@@ -41,6 +41,16 @@ global:
       userKey: ""
       passwordKey: ""
       extraArgs: ""
+    redis:
+      installed: true
+      protocol: "redis"
+      # --  provide default values if redis.installed is set to false
+      hosts:
+        - redis:6379
+      secretName: "redis-secret"
+      userKey: "redis-user"
+      passwordKey: "redis-password"
+      extraArgs: ""
   ingress:
     enabled: false
     hosts:
@@ -69,7 +79,7 @@ image:
   repository: harness/gitops-service-signed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.70.9"
+  tag: "v0.71.5"
   digest: ""
   imagePullSecrets: []
 
@@ -112,7 +122,6 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 2
     memory: 256Mi
   requests:
     cpu: 2
@@ -122,8 +131,8 @@ autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
+  targetCPU: ""
+  targetMemory: ""
 
 nodeSelector: {}
 
@@ -199,7 +208,7 @@ agentRedisImage:
     registry: docker.io
     repository: redis
     pullPolicy: IfNotPresent
-    tag: "6.2.6-alpine"
+    tag: "6.2.12-alpine"
     digest: ""
     imagePullSecrets: []
 

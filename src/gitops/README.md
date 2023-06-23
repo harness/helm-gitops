@@ -1,8 +1,6 @@
 # gitops
 
-
-![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
-
+![Version: 0.5.10](https://img.shields.io/badge/Version-0.5.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 Harness GitOps
 
@@ -34,19 +32,19 @@ Harness GitOps
 | agentDockerImage.image.pullPolicy | string | `"Always"` |  |
 | agentDockerImage.image.registry | string | `"docker.io"` |  |
 | agentDockerImage.image.repository | string | `"harness/gitops-agent"` |  |
-| agentDockerImage.image.tag | string | `"v0.42.0"` |  |
+| agentDockerImage.image.tag | string | `"v0.52.2"` |  |
 | agentHAProxyImage.image.digest | string | `""` |  |
 | agentHAProxyImage.image.imagePullSecrets | list | `[]` |  |
 | agentHAProxyImage.image.pullPolicy | string | `"IfNotPresent"` |  |
 | agentHAProxyImage.image.registry | string | `"docker.io"` |  |
 | agentHAProxyImage.image.repository | string | `"haproxy"` |  |
-| agentHAProxyImage.image.tag | string | `"2.0.25-alpine"` |  |
+| agentHAProxyImage.image.tag | string | `"lts-alpine3.17"` |  |
 | agentRedisImage.image.digest | string | `""` |  |
 | agentRedisImage.image.imagePullSecrets | list | `[]` |  |
 | agentRedisImage.image.pullPolicy | string | `"IfNotPresent"` |  |
 | agentRedisImage.image.registry | string | `"docker.io"` |  |
 | agentRedisImage.image.repository | string | `"redis"` |  |
-| agentRedisImage.image.tag | string | `"6.2.6-alpine"` |  |
+| agentRedisImage.image.tag | string | `"6.2.12-alpine"` |  |
 | argoAppSetImage.image.digest | string | `""` |  |
 | argoAppSetImage.image.imagePullSecrets | list | `[]` |  |
 | argoAppSetImage.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -58,17 +56,39 @@ Harness GitOps
 | argoCDImage.image.pullPolicy | string | `"IfNotPresent"` |  |
 | argoCDImage.image.registry | string | `"quay.io"` |  |
 | argoCDImage.image.repository | string | `"argoproj/argocd"` |  |
-| argoCDImage.image.tag | string | `"v2.3.4"` |  |
+| argoCDImage.image.tag | string | `"v2.5.16"` |  |
 | autoscaling.enabled | bool | `false` |  |
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
-| autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| autoscaling.targetCPU | string | `""` |  |
+| autoscaling.targetMemory | string | `""` |  |
 | certPath | string | `""` |  |
 | enableCDN | string | `"false"` |  |
 | eventsFrameworkEnvNamespace | string | `"free"` |  |
 | fullnameOverride | string | `""` |  |
 | gitopsHttpAcme | string | `"false"` |  |
 | gitopsTaskLongPolling | string | `"true"` |  |
+| global.database.mongo.extraArgs | string | `""` |  |
+| global.database.mongo.hosts | list | `[]` | provide default values if mongo.installed is set to false |
+| global.database.mongo.installed | bool | `true` |  |
+| global.database.mongo.passwordKey | string | `""` |  |
+| global.database.mongo.protocol | string | `"mongodb"` |  |
+| global.database.mongo.secretName | string | `""` |  |
+| global.database.mongo.userKey | string | `""` |  |
+| global.database.postgres.extraArgs | string | `""` |  |
+| global.database.postgres.hosts[0] | string | `"postgres:5432"` |  |
+| global.database.postgres.installed | bool | `true` |  |
+| global.database.postgres.passwordKey | string | `""` |  |
+| global.database.postgres.protocol | string | `"postgres"` |  |
+| global.database.postgres.secretName | string | `""` |  |
+| global.database.postgres.userKey | string | `""` |  |
+| global.database.timescaledb.extraArgs | string | `""` |  |
+| global.database.timescaledb.hosts | list | `["timescaledb-single-chart:5432"]` | provide default values if mongo.installed is set to false |
+| global.database.timescaledb.installed | bool | `true` |  |
+| global.database.timescaledb.passwordKey | string | `""` |  |
+| global.database.timescaledb.protocol | string | `"jdbc:postgresql"` |  |
+| global.database.timescaledb.secretName | string | `""` |  |
+| global.database.timescaledb.userKey | string | `""` |  |
 | global.ingress.enabled | bool | `false` |  |
 | global.ingress.hosts[0] | string | `"my-host.example.org"` |  |
 | global.ingress.objects.annotations | object | `{}` |  |
@@ -87,7 +107,7 @@ Harness GitOps
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"harness/gitops-service-signed"` |  |
-| image.tag | string | `"v0.62.4"` |  |
+| image.tag | string | `"v0.71.5"` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `"internal"` |  |
