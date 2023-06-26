@@ -45,12 +45,6 @@ Harness GitOps
 | agentRedisImage.image.registry | string | `"docker.io"` |  |
 | agentRedisImage.image.repository | string | `"redis"` |  |
 | agentRedisImage.image.tag | string | `"6.2.12-alpine"` |  |
-| argoAppSetImage.image.digest | string | `""` |  |
-| argoAppSetImage.image.imagePullSecrets | list | `[]` |  |
-| argoAppSetImage.image.pullPolicy | string | `"IfNotPresent"` |  |
-| argoAppSetImage.image.registry | string | `"quay.io"` |  |
-| argoAppSetImage.image.repository | string | `"argoproj/argocd-applicationset"` |  |
-| argoAppSetImage.image.tag | string | `"v0.4.1"` |  |
 | argoCDImage.image.digest | string | `""` |  |
 | argoCDImage.image.imagePullSecrets | list | `[]` |  |
 | argoCDImage.image.pullPolicy | string | `"IfNotPresent"` |  |

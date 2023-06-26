@@ -177,15 +177,6 @@ agentDockerImage:
     digest: ""
     imagePullSecrets: []
 
-argoAppSetImage:
-  image:
-    registry: quay.io
-    repository: argoproj/argocd-applicationset
-    pullPolicy: IfNotPresent
-    tag: "v0.4.1"
-    digest: ""
-    imagePullSecrets: []
-
 argoCDImage:
   image:
     registry: quay.io

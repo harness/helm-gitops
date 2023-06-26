@@ -14,7 +14,6 @@ data:
   AGENT_ENABLE_AUTH: {{.Values.agent.enableAuth | quote}}
   AGENT_HTTP_TARGET: {{ .Values.global.loadbalancerURL }}/gitops
   AGENT_PROTOCOL: {{.Values.agent.protocol | quote}}
-  AGENT_ARGO_APPSET_IMAGE_REPO: {{include "common.images.image" (dict "imageRoot" .Values.argoAppSetImage.image "global" .Values.global)  | quote}}
   AGENT_ARGO_CD_IMAGE_REPO: {{include "common.images.image" (dict "imageRoot" .Values.argoCDImage.image "global" .Values.global)  | quote}}
   AGENT_HA_PROXY_IMAGE_REPO: {{include "common.images.image" (dict "imageRoot" .Values.agentHAProxyImage.image "global" .Values.global)  | quote}}
   AGENT_REDIS_IMAGE_REPO: {{include "common.images.image" (dict "imageRoot" .Values.agentRedisImage.image "global" .Values.global)  | quote}}
