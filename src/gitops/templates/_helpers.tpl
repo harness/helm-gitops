@@ -77,5 +77,5 @@ Create the name of the service account to use
 {{- end }}
 
 {{- define "gitops.pullSecrets" -}}
-{{ include "common.images.pullSecrets" (dict "images" (list .Values.image .Values.waitForInitContainer.image .Values.upgraderImage.image .Values.agentDockerImage.image .Values.argoAppSetImage.image .Values.argoCDImage.image .Values.agentHAProxyImage .Values.agentRedisImage.image ) "global" .Values.global ) }}
+{{ include "common.images.pullSecrets" (dict "images" (list .Values.image .Values.waitForInitContainer.image .Values.upgraderImage.image .Values.agentDockerImage.image .Values.argoCDImage.image .Values.agentHAProxyImage .Values.agentRedisImage.image ) "global" .Values.global ) }}
 {{- end -}}
