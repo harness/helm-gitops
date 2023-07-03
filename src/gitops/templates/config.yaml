@@ -37,10 +37,8 @@ data:
   GITOPS_SERVICE_MONGODB_DB_NAME: {{.Values.mongo.dbName | quote}}
   GITOPS_SERVICE_MONGODB_ENABLE_REFLECTION: {{.Values.mongo.enableReflection | quote}}
   GITOPS_SERVICE_TASK_LONG_POLLING: {{.Values.gitopsTaskLongPolling | quote}}
-  GITOPS_SERVICE_TIMESCALE_CERT_PATH: {{.Values.timescale.certPath | quote}}
   GITOPS_SERVICE_TIMESCALE_DB_NAME: {{.Values.timescale.dbName | quote}}
   GITOPS_SERVICE_TIMESCALE_LOG_LEVEL: {{.Values.timescale.logLevel | quote}}
-  GITOPS_SERVICE_TIMESCALE_USE_TLS: {{.Values.timescale.useTls | quote}}
   GITOPS_SERVICE_VERSION_FILE_LOCATION: {{.Values.versionFileLocation | quote}}
   IDENTITY_SERVICE_SECRET: {{.Values.identitySecret | quote}}
   JWT_SECRET: {{.Values.jwtSecret | quote}}
