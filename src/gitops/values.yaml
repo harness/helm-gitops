@@ -41,6 +41,8 @@ global:
       userKey: ""
       passwordKey: ""
       extraArgs: ""
+      certName: ""
+      certKey: ""
     redis:
       installed: true
       protocol: "redis"
@@ -122,7 +124,6 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 2
     memory: 256Mi
   requests:
     cpu: 2
