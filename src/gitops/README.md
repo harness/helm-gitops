@@ -1,6 +1,6 @@
 # gitops
 
-![Version: 0.5.10](https://img.shields.io/badge/Version-0.5.10-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 Harness GitOps
 
@@ -45,12 +45,6 @@ Harness GitOps
 | agentRedisImage.image.registry | string | `"docker.io"` |  |
 | agentRedisImage.image.repository | string | `"redis"` |  |
 | agentRedisImage.image.tag | string | `"6.2.12-alpine"` |  |
-| argoAppSetImage.image.digest | string | `""` |  |
-| argoAppSetImage.image.imagePullSecrets | list | `[]` |  |
-| argoAppSetImage.image.pullPolicy | string | `"IfNotPresent"` |  |
-| argoAppSetImage.image.registry | string | `"quay.io"` |  |
-| argoAppSetImage.image.repository | string | `"argoproj/argocd-applicationset"` |  |
-| argoAppSetImage.image.tag | string | `"v0.4.1"` |  |
 | argoCDImage.image.digest | string | `""` |  |
 | argoCDImage.image.imagePullSecrets | list | `[]` |  |
 | argoCDImage.image.pullPolicy | string | `"IfNotPresent"` |  |

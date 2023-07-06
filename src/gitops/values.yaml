@@ -81,7 +81,7 @@ image:
   repository: harness/gitops-service-signed
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.71.5"
+  tag: "v0.73.2"
   digest: ""
   imagePullSecrets: []
 
@@ -174,16 +174,7 @@ agentDockerImage:
     registry: docker.io
     repository: harness/gitops-agent
     pullPolicy: Always
-    tag: "v0.52.2"
-    digest: ""
-    imagePullSecrets: []
-
-argoAppSetImage:
-  image:
-    registry: quay.io
-    repository: argoproj/argocd-applicationset
-    pullPolicy: IfNotPresent
-    tag: "v0.4.1"
+    tag: "v0.54.3"
     digest: ""
     imagePullSecrets: []
 
@@ -192,7 +183,7 @@ argoCDImage:
     registry: quay.io
     repository: argoproj/argocd
     pullPolicy: IfNotPresent
-    tag: "v2.5.16"
+    tag: "v2.7.2"
     digest: ""
     imagePullSecrets: []
 
