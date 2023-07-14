@@ -1,6 +1,6 @@
 # gitops
 
-![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
+![Version: 0.6.5](https://img.shields.io/badge/Version-0.6.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.1](https://img.shields.io/badge/AppVersion-0.0.1-informational?style=flat-square)
 
 Harness GitOps
 
@@ -32,7 +32,7 @@ Harness GitOps
 | agentDockerImage.image.pullPolicy | string | `"Always"` |  |
 | agentDockerImage.image.registry | string | `"docker.io"` |  |
 | agentDockerImage.image.repository | string | `"harness/gitops-agent"` |  |
-| agentDockerImage.image.tag | string | `"v0.52.2"` |  |
+| agentDockerImage.image.tag | string | `"v0.54.3"` |  |
 | agentHAProxyImage.image.digest | string | `""` |  |
 | agentHAProxyImage.image.imagePullSecrets | list | `[]` |  |
 | agentHAProxyImage.image.pullPolicy | string | `"IfNotPresent"` |  |
@@ -50,7 +50,7 @@ Harness GitOps
 | argoCDImage.image.pullPolicy | string | `"IfNotPresent"` |  |
 | argoCDImage.image.registry | string | `"quay.io"` |  |
 | argoCDImage.image.repository | string | `"argoproj/argocd"` |  |
-| argoCDImage.image.tag | string | `"v2.5.16"` |  |
+| argoCDImage.image.tag | string | `"v2.7.2"` |  |
 | autoscaling.enabled | bool | `false` |  |
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
@@ -91,6 +91,7 @@ Harness GitOps
 | global.database.timescaledb.passwordKey | string | `""` |  |
 | global.database.timescaledb.protocol | string | `"jdbc:postgresql"` |  |
 | global.database.timescaledb.secretName | string | `""` |  |
+| global.database.timescaledb.sslEnabled | bool | `false` |  |
 | global.database.timescaledb.userKey | string | `""` |  |
 | global.ingress.enabled | bool | `false` |  |
 | global.ingress.hosts[0] | string | `"my-host.example.org"` |  |
@@ -110,7 +111,7 @@ Harness GitOps
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.registry | string | `"docker.io"` |  |
 | image.repository | string | `"harness/gitops-service-signed"` |  |
-| image.tag | string | `"v0.71.5"` |  |
+| image.tag | string | `"v0.73.2"` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.className | string | `"internal"` |  |
