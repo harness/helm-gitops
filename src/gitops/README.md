@@ -91,6 +91,7 @@ Harness GitOps
 | global.database.timescaledb.passwordKey | string | `""` |  |
 | global.database.timescaledb.protocol | string | `"jdbc:postgresql"` |  |
 | global.database.timescaledb.secretName | string | `""` |  |
+| global.database.timescaledb.sslEnabled | bool | `false` |  |
 | global.database.timescaledb.userKey | string | `""` |  |
 | global.ingress.enabled | bool | `false` |  |
 | global.ingress.hosts[0] | string | `"my-host.example.org"` |  |
