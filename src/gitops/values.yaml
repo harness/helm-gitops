@@ -41,6 +41,7 @@ global:
       userKey: ""
       passwordKey: ""
       extraArgs: ""
+      sslEnabled: false
       certName: ""
       certKey: ""
     redis:
