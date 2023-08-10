@@ -48,3 +48,6 @@ data:
   REDIS_MASTER_NAME: {{.Values.redis.masterName | quote}}
   REDIS_SSL_ENABLED: {{.Values.redis.sslEnabled | quote}}
   REDIS_SSL_CA_CERT_PATH: {{.Values.redis.sslCAPath | quote}}
+  KUBECTL_VERSION: {{.Values.sops.kubectlVersion | quote}}
+  SOPS_VERSION: {{.Values.sops.sopsVersion | quote}}
+  HELM_SECRETS_VERSION: {{.Values.sops.helmSecretsVersion | quote}}
