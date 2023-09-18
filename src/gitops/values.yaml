@@ -264,5 +264,5 @@ versionFileLocation: "/app/VERSIONS/SERVER"
 jwtSecret: "HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU="
 identitySecret: "HVSKUYqD4e5Rxu12hFDdCJKGM64sxgEynvdDhaOHaTHhwwn0K4Ttr0uoOxSsEVYNrUU="
 
-gitOpsOrgLevel: true
-gitOpsIAM: true
+gitOpsOrgLevel: "true"
+gitOpsIAM: "true"
