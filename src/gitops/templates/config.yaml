@@ -48,3 +48,5 @@ data:
   REDIS_MASTER_NAME: {{.Values.redis.masterName | quote}}
   REDIS_SSL_ENABLED: {{.Values.redis.sslEnabled | quote}}
   REDIS_SSL_CA_CERT_PATH: {{.Values.redis.sslCAPath | quote}}
+  GITOPS_ORG_LEVEL: {{.Values.gitOpsOrgLevel | quote}}
+  GITOPS_IAM: {{.Values.gitOpsIAM | quote}}
